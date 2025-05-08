@@ -16,7 +16,16 @@ export const CartProvider = ({children}) => {
   const handleAddItem = (product) => {
     addItem(product)
     toast.success(`${product.name} added to cart !`, {
-      position: "top-right",
+      position: "top-left",
+      autoClose: 2000,
+    })
+  }
+
+  const handleRemoveItem = (id) => {
+    const product = cart.find((item) => item.id === id)
+    removeItem(id)
+    toast.info(`Successfully removed ${product.name} from the cart !`, {
+      position: "top-left",
       autoClose: 2000,
     })
   }
@@ -52,7 +61,7 @@ export const CartProvider = ({children}) => {
   }
 
   return (
-    <CartContext.Provider value={{ cart, addItem: handleAddItem, removeItem, clearCart, updateQuantity }}>
+    <CartContext.Provider value={{ cart, addItem: handleAddItem, removeItem: handleRemoveItem, clearCart, updateQuantity }}>
       {children}
     </CartContext.Provider>
   )

@@ -2,15 +2,15 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 export default function Cart() {
-  const { cart, removeItem, clearCart, updateQuantity } = useContext(CartContext);
+  const { cart, removeItem: handleRemoveItem, clearCart, updateQuantity } = useContext(CartContext);
   const totalPrice = (cart || []).reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   if (!cart?.length) {
     return <p className="p-4">Cart is empty.</p>;
-  }  
+  }
 
   return (
-    <div className="p-4 border rounded shadow bg-white mb-4 max-w-3xl mx-auto">
+    <div className="p-4 border rounded shadow bg-white mb-4 max-w-md md:max-w-2xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Your Cart</h2>
 
       {cart.map((item) => (
@@ -25,7 +25,7 @@ export default function Cart() {
 
           <div className="flex items-center gap-2">
             <input type="number" min="1" value={item.quantity} onChange={(e) => updateQuantity(item.id, e.target.value)} className="w-16 border px-2 py-1 rounded" />
-            <button onClick={() => removeItem(item.id)} className="text-sm text-red-600 cursor-pointer hover:underline">
+            <button onClick={() => handleRemoveItem(item.id)} className="text-sm text-red-600 cursor-pointer hover:underline">
               Remove
             </button>
           </div>
