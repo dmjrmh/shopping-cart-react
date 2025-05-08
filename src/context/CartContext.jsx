@@ -29,7 +29,6 @@ export const CartProvider = ({children}) => {
       autoClose: 2000,
     })
   }
-
   const addItem = (item)=> {
     setCart((cartItems) => {
       const existingCart = cartItems.find((e) => e.id === item.id)
@@ -48,6 +47,10 @@ export const CartProvider = ({children}) => {
 
   const clearCart = () => {
     setCart([])
+    toast.warning("Cart succesfully cleared!", {
+      position: "top-left",
+      autoClose: 2000,
+    })
   }
 
   const updateQuantity = (id, newQuantity) => {
